@@ -113,7 +113,19 @@ class AVL_Tree(object):
             self.inorder_print(start.left)
             self.inorder_print(start.right)
             print(start,end=' ')
+            
+        
+    def preOrder(self, root): 
     
+        if not root: 
+            return
+  
+        print("{0} ".format(root.value), end="") 
+        self.preOrder(root.left) 
+        self.preOrder(root.right)
+
+        
+#Ex6   
     def delete(self,root,key): #Pour le delete on enleve le node et apres on refait comme le insert pour remettre l'arbre equilibré
         if not root:
             return(root)
@@ -169,17 +181,34 @@ class AVL_Tree(object):
             return self.leftRotate(root)
         
         return(root)  #Si on est pas dans tous les cas
+        
+        
+#Ex7    
+    def Sorted_list(self,root):
+        L=[]
+        if root:            
+            self.Sorted_list(root.right)  #On prend d'abord a droite car les plus grand chiffres sont a droite
+            L.append(root.key)
+            self.Sorted_list(root.left)  #Une fois qu'on a pris tous az droite on vient a gauche
+        return L
+        
+        
+        
+#Ex8    
+    def create_Tree(self,L):
+        tree = AVL_Tree() #On defenie un Tree vide
+        for c in L:
+            c.insertAVL(tree.root,c) #On insert chaque valeur dans le tree
+        return tree
     
     
-    
-    def preOrder(self, root): 
-    
-        if not root: 
-            return
-  
-        print("{0} ".format(root.value), end="") 
-        self.preOrder(root.left) 
-        self.preOrder(root.right) 
+#Ex9    
+    def Compare_2AVL(self,root_1,root_2):
+        while(root_2!=None):
+            root_1.insertAVL(root_1,root_2.key)
+            root_2.delete(root2,root_2.key)
+        return root_1
+ 
             
 myTree=AVL_Tree()
 root=None
